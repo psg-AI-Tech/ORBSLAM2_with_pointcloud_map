@@ -53,15 +53,16 @@ void Optimizer::BundleAdjustment(const vector<KeyFrame *> &vpKFs, const vector<M
     vbNotIncludedMP.resize(vpMP.size());
 
     g2o::SparseOptimizer optimizer;
-    g2o::BlockSolver_6_3::LinearSolverType * linearSolver;
 
+    //  1. 线性方程求解器
+    g2o::BlockSolver_6_3::LinearSolverType *linearSolver;
     linearSolver = new g2o::LinearSolverEigen<g2o::BlockSolver_6_3::PoseMatrixType>();
-
+    //  2. 矩阵块求解器
     g2o::BlockSolver_6_3 * solver_ptr = new g2o::BlockSolver_6_3(linearSolver);
-    // g2o::BlockSolver_6_3 * solver_ptr = new g2o::BlockSolver_6_3( unique_ptr<g2o::BlockSolver_6_3::LinearSolverType>(linearSolver));
-
+    // g2o::BlockSolver_6_3 *solver_ptr = new g2o::BlockSolver_6_3( std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType>(linearSolver));
+    // 3. 迭代器算法
     g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg(solver_ptr);
-// g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg( unique_ptr<BlockSolver>(solver_ptr));
+    // g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg( std::unique_ptr<g2o::BlockSolver_6_3>(solver_ptr));
 
     optimizer.setAlgorithm(solver);
 

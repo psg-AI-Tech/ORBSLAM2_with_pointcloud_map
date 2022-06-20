@@ -36,7 +36,8 @@ LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
 # find_package(OpenCV 2.4.3 REQUIRED)
 find_package(OpenCV 3.2.0 REQUIRED)
-find_package(Eigen3 3.1.0 REQUIRED)
+# find_package(Eigen3 3.1.0 REQUIRED)
+SET(EIGEN3_INCLUDE_DIR "/home/zj/opt/eigen-3.1")
 find_package(Pangolin REQUIRED)
 
 set(G2O_DIR "/home/zj/catkin_ws/src/rosPack_amend/ORBSLAM2_with_pointcloud_map/orbslam2_modified/g2o_with_orbslam2/lib")
